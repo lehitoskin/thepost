@@ -22,11 +22,13 @@
 (require racket/include)
 (include "config.rkt")
 
+#|RACKET-Y DOCUMENTATION - scribble/manual|#
+
 ; print out the header/body contents in a sane manner
 (define printer
   (λ (lst)
     (if (empty? lst)
-        (display "Empty list!\n")
+        (raise-argument-error 'printer "populated list" lst)
         (cond ((empty? (rest lst)) (first lst))
               (else (printf "~a\n" (first lst)) (printer (rest lst)))))))
 
@@ -58,11 +60,13 @@
     (printf "\n\nsender: ~a\nreceiver: ~s\nserver: ~a\nnewsgroup: ~a\n"
             sender receiver server newsgroup)
     (let ((communicator (connect-to-server server #|port-number|#)))
-      (define-values (total start finish) (open-news-group communicator newsgroup))
+      (define-values (total start finish) (open-news-group communicator
+                                                           newsgroup))
       ; begin main program loop here!
       ; to add: send an article to the server
       (let loop ()
-        (printf "\nWhat message would you like to read?\nIndex of ~a from ~a to ~a: "
+        (printf
+         "\nWhat message would you like to read?\nIndex of ~a from ~a to ~a: "
                 total start finish)
         (let [(index (read))]
           (if (bounds? start finish index)
@@ -89,7 +93,8 @@
                        (let ((bodies (body-of-message communicator index)))
                          (newline)
                          (printer bodies))]
-                      (else (printf "I don't understand ~a" (symbol->string choice)))))))
+                      (else (printf "I don't understand ~a" (symbol->string
+                                                             choice)))))))
         (loop)))))
 
 (nntp-client)
