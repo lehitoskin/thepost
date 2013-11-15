@@ -6,3 +6,6 @@
 
 ; receiving connection port
 (define receiver 119)
+
+(define username "anon")
+(define password "anon")
