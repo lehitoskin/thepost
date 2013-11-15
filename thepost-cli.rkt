@@ -74,7 +74,7 @@
     (define newsgroup (symbol->string (read)))
     (printf "\n\nsender: ~a\nreceiver: ~s\nserver: ~a\nnewsgroup: ~a\n"
             sender receiver server newsgroup)
-    (let ((communicator (connect-to-server server #|port-number|#)))
+    (let ((communicator (connect-to-server server port-number)))
       ; auth to server
       ; so messy!
       (if (eq? auth #t)
