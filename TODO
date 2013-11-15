@@ -1,8 +1,10 @@
-- Allow the user to authenticate to a password-protected server
-	* determine if server requires authentication
-
 - Ability to post to articles
 
-- Add a sweet GUI
+- Change nntp-cli to accept command-line arguments (or parameters for procedure)
+
+- Rename nntp-clie to base
+
+- Add a sweet GUI frontend to base
+  * GUI frontend calls base, then draws the results to the GUI canvas
 
 - ffi/unsafe for ncurses?
